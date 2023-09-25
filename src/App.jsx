@@ -1,31 +1,14 @@
 import { useState } from 'react'
 import TaskList from './components/TaskList'
+import { Route, Routes } from 'react-router-dom'
+import Tasks from './pages/Tasks'
+import Login from './pages/Login'
 function App() {
-  const [tasks, setTasks] = useState([])
-  const [inputValue, setInputValue] = useState({})
-
-  const handleInput = (e) => {
-    if(e.target.name === "task") {
-      setInputValue(state => ({...state, [e.target.name]: e.target.value}))
-    }
-  }
-
-  const submitTask = () => {
-    if(inputValue.task){
-      setTasks(state => [...state, inputValue.task])
-      console.log(inputValue.task)
-      setInputValue(state => ({...state, task: ""}))
-    }
-  }
-
   return (
-    <>
-    <div>Today's Todo Tasks</div>
-      <input type="text" name="task" placeholder='Add a new Task' onChange={handleInput} value={inputValue.task ? inputValue.task : ""}/>
-      {/* <input type="text" name="event" placeholder='Add a new Event' onChange={handleInput} value={inputValue["event"]}/> */}
-      <button onClick={submitTask}>Add Task</button>
-      <TaskList tasks={tasks}/>
-    </>
+    <Routes>
+      <Route index element={<Tasks />}/>
+      <Route path="login" element={<Login />}/>
+    </Routes>
   )
 }
 
