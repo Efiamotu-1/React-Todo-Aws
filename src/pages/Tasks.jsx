@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import TaskList from '../components/TaskList'
+import Button from '../components/Button'
+import styles from './Tasks.module.css'
 
 function Tasks() {
     const [tasks, setTasks] = useState([])
@@ -11,7 +13,8 @@ function Tasks() {
       }
     }
   
-    const submitTask = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
       if(inputValue.task){
         setTasks(state => [...state, inputValue.task])
         console.log(inputValue.task)
@@ -20,14 +23,15 @@ function Tasks() {
     }
   
     return (
-      <>
-   
-      <div>Today's Todo Tasks</div>
+      <div className={styles.page}>
+        <h1>Welcome To Today's Todo Tasks</h1>
+        <form onSubmit={handleSubmit} className={styles.form}>
+
         <input type="text" name="task" placeholder='Add a new Task' onChange={handleInput} value={inputValue.task ? inputValue.task : ""}/>
-        {/* <input type="text" name="event" placeholder='Add a new Event' onChange={handleInput} value={inputValue["event"]}/> */}
-        <button onClick={submitTask}>Add Task</button>
+        <Button type="primary">Add Task</Button>
+        </form>
         <TaskList tasks={tasks}/>
-      </>
+      </div>
     )
 }
 

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Button from "../components/Button";
 import { useAuth } from "../contexts/AuthContext";
-import styles from "./Login.module.css";
+import styles from "./Register.module.css";
 
-export default function Login() {
+export default function Register() {
+  const [username, setUsername] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,21 +15,31 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (email && password) login(email, password);
+    if (username && email && password) login(username, email, password);
+
   }
 
   useEffect(
     function () {
-      if (isAuthenticated) navigate("/task", { replace: true });
+      if (isAuthenticated) navigate("/app", { replace: true });
     },
     [isAuthenticated, navigate]
   );
 
   return (
-    <main className={styles.login}>
-      {/* <PageNav /> */}
+    <main className={styles.register}>
 
       <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.row}>
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+          />
+        </div>
+
         <div className={styles.row}>
           <label htmlFor="email">Email address</label>
           <input
@@ -50,8 +61,9 @@ export default function Login() {
         </div>
 
         <div>
-          <Button type="primary">Login</Button>
+          <Button type="primary">Register</Button>
         </div>
+      <div className={styles["login-link"]}>Have an account  <Link style={{color: "blue"}} to="login">Login</Link></div>
       </form>
     </main>
   );

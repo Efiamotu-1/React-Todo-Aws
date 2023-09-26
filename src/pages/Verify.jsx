@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { useAuth } from "../contexts/AuthContext";
-import styles from "./Login.module.css";
+import styles from "./Verify.module.css";
 
-export default function Login() {
+export default function Verify() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [code, setCode] = useState("");
 
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -14,19 +14,18 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (email && password) login(email, password);
+    if (email && code) login(email, code);
   }
 
   useEffect(
     function () {
-      if (isAuthenticated) navigate("/task", { replace: true });
+      if (isAuthenticated) navigate("/app", { replace: true });
     },
     [isAuthenticated, navigate]
   );
 
   return (
-    <main className={styles.login}>
-      {/* <PageNav /> */}
+    <main className={styles.verify}>
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.row}>
@@ -40,17 +39,17 @@ export default function Login() {
         </div>
 
         <div className={styles.row}>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="code">Password</label>
           <input
-            type="password"
-            id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
+            type="number"
+            id="code"
+            onChange={(e) => setCode(e.target.value)}
+            value={code}
           />
         </div>
 
         <div>
-          <Button type="primary">Login</Button>
+          <Button type="primary">Verify</Button>
         </div>
       </form>
     </main>
