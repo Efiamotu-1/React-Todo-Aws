@@ -12,10 +12,22 @@ import Register from "./pages/Register";
 
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 Amplify.configure(awsExports);
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0
+    }
+  }
+})
 
 function App() {
   return (
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false}/>
     <AuthProvider>
         <BrowserRouter>
             <Routes>
@@ -38,6 +50,7 @@ function App() {
             </Routes>
         </BrowserRouter>
     </AuthProvider>
+    </QueryClientProvider>
   );
 }
 

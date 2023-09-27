@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import TaskList from '../components/TaskList'
 import Button from '../components/Button'
 import styles from './Tasks.module.css'
@@ -6,31 +6,34 @@ import { useAuth } from '../contexts/AuthContext'
 import { API, graphqlOperation } from 'aws-amplify'
 import { createTask } from '../graphql/mutations'
 import { listTasks } from '../graphql/queries'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 function Tasks() {
     const {user, logout} = useAuth()
-    const [tasks, setTasks] = useState([])
     const [inputValue, setInputValue] = useState({})
+    
+    const queryClient = useQueryClient()
     const handleInput = (e) => {
       if(e.target.name === "task") {
         setInputValue(state => ({...state, [e.target.name]: e.target.value}))
       }
     }
-    console.log(user)
     const getTasks = async() => {
       try{
         const taskData = await API.graphql(graphqlOperation(listTasks))
         const tasks = taskData.data.listTasks.items
-        setTasks(tasks)
+        return tasks
       }catch(err) {
         console.error(err)
       }
     }
+    const {isLoading, data: tasks} = useQuery({
+      queryKey: ['task'],
+      queryFn: () => getTasks()
+    })
 
-    useEffect(() => {
-      getTasks()
-    }, [])
-  
+
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try{
@@ -41,26 +44,39 @@ function Tasks() {
             const result = await API.graphql(graphqlOperation(createTask, {input: newTask}))
             console.log("success")
             console.log(result)
-            console.log(inputValue.task)
-            setTasks([...tasks, newTask])
-
+            // console.log(inputValue.task)
+            // setTasks([...tasks, newTask])
+            setInputValue({...inputValue, task: ""})
+            return result
           }
         }catch(err) {
           console.error(err)
         }
     }
   
+    const {mutate, isLoading: isCreatingTask} = useMutation({
+      mutationFn: (e) => handleSubmit(e),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['task']
+        })
+      },
+      onError: (err) => {
+        console.error(err.message)
+      }
+
+    })
     return (
       <div className={styles.page}>
         <Button type="primary" onClick={() => logout()}>Logout</Button>
       <div className={styles.container}>
         <h1>{user.username} Welcome To Today's Todo Tasks</h1>
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={mutate} className={styles.form}>
 
         <input type="text" name="task" placeholder='Add a new Task' onChange={handleInput} value={inputValue.task ? inputValue.task : ""}/>
-        <Button type="primary">Add Task</Button>
+        <Button type="primary" disabled={isCreatingTask}>Add Task</Button>
         </form>
-        <TaskList tasks={tasks}/>
+        {isLoading ? <p>Loading Tasks...</p> : <TaskList tasks={tasks}/>}
       </div>
       </div>
     )
