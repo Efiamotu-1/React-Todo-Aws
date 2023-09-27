@@ -27,7 +27,7 @@ export default function Verify() {
 
   useEffect(
     function () {
-      if (isAuthenticated) navigate("/app", { replace: true });
+      if (isAuthenticated) navigate("/task", { replace: true });
     },
     [isAuthenticated, navigate]
   );

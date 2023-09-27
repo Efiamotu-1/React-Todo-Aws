@@ -49,3 +49,90 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
+export const createTask = /* GraphQL */ `
+  mutation CreateTask(
+    $input: CreateTaskInput!
+    $condition: ModelTaskConditionInput
+  ) {
+    createTask(input: $input, condition: $condition) {
+      content
+      id
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updateTask = /* GraphQL */ `
+  mutation UpdateTask(
+    $input: UpdateTaskInput!
+    $condition: ModelTaskConditionInput
+  ) {
+    updateTask(input: $input, condition: $condition) {
+      content
+      id
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteTask = /* GraphQL */ `
+  mutation DeleteTask(
+    $input: DeleteTaskInput!
+    $condition: ModelTaskConditionInput
+  ) {
+    deleteTask(input: $input, condition: $condition) {
+      content
+      id
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const createJob = /* GraphQL */ `
+  mutation CreateJob(
+    $input: CreateJobInput!
+    $condition: ModelJobConditionInput
+  ) {
+    createJob(input: $input, condition: $condition) {
+      description
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateJob = /* GraphQL */ `
+  mutation UpdateJob(
+    $input: UpdateJobInput!
+    $condition: ModelJobConditionInput
+  ) {
+    updateJob(input: $input, condition: $condition) {
+      description
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteJob = /* GraphQL */ `
+  mutation DeleteJob(
+    $input: DeleteJobInput!
+    $condition: ModelJobConditionInput
+  ) {
+    deleteJob(input: $input, condition: $condition) {
+      description
+      id
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;

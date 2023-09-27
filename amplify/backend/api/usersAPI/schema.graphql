@@ -8,3 +8,11 @@ type User @model {
   email: String!
   password: String!
 }
+
+type Task @model @auth(rules: [{ allow: owner }]) {
+  content: String
+}
+
+type Job @model {
+  description: String!
+}

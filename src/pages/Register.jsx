@@ -40,7 +40,7 @@ export default function Register() {
 
   useEffect(
     function () {
-      if (isAuthenticated) navigate("/app", { replace: true });
+      if (isAuthenticated) navigate("/task", { replace: true });
     },
     [isAuthenticated, navigate]
   );
