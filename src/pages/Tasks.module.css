@@ -1,6 +1,14 @@
 .page {
-    width: 50%;
-    margin: auto;
+  text-align: right;
+  padding: 1rem 2rem;
+}
+.container {
+
+  width: 50%;
+  margin: auto;
+  color: #000;
+  text-align: start;
+
 }
 
 .page h1 {

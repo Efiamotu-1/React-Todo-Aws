@@ -10,7 +10,9 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "login":
-      return { ...state, user: action.payload, isAuthenticated: true };
+      return { ...state, user: action.payload };
+    case "verify":
+      return {...state, isAuthenticated: true}  
     case "logout":
       return { ...state, user: null, isAuthenticated: false };
     default:
@@ -24,17 +26,21 @@ function AuthProvider({ children }) {
     initialState
   );
 
-  function login(email, password) {
+  function login(user) {
     // if (email === FAKE_USER.email && password === FAKE_USER.password)
-    //   dispatch({ type: "login", payload: FAKE_USER });
+      dispatch({ type: "login", payload: user });
   }
 
   function logout() {
     dispatch({ type: "logout" });
   }
 
+  function verify() {
+    dispatch({ type: "verify" });
+  }
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, login, verify, logout }}>
       {children}
     </AuthContext.Provider>
   );

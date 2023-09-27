@@ -3,6 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import Button from "../components/Button";
 import { useAuth } from "../contexts/AuthContext";
 import styles from "./Register.module.css";
+import {Auth} from 'aws-amplify'
+
+
 
 export default function Register() {
   const [username, setUsername] = useState("")
@@ -12,10 +15,26 @@ export default function Register() {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
 
-    if (username && email && password) login(username, email, password);
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try{
+      if (username && email && password) {
+        const {user} = await Auth.signUp({
+          username: username,
+          password: password,
+          attributes: {
+            email: email
+          }
+        })
+        login(user)
+        navigate("/verify")
+        console.log("clicked")
+      };
+    }catch(err) {
+      console.error(err)
+    }
+
 
   }
 

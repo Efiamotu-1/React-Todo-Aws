@@ -10,6 +10,10 @@ import Login from "./pages/Login";
 import Verify from "./pages/Verify";
 import Register from "./pages/Register";
 
+import { Amplify } from 'aws-amplify';
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
+
 function App() {
   return (
     <AuthProvider>
