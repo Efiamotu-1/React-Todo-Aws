@@ -69,7 +69,6 @@ export default function Task({task}) {
   return (
     <>
     <div className={styles.task}> 
-    {/* <span><input type="checkbox"/></span> */}
     <span> 
       {task.content}
       </span> 

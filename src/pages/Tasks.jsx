@@ -44,8 +44,6 @@ function Tasks() {
             const result = await API.graphql(graphqlOperation(createTask, {input: newTask}))
             console.log("success")
             console.log(result)
-            // console.log(inputValue.task)
-            // setTasks([...tasks, newTask])
             setInputValue({...inputValue, task: ""})
             return result
           }
