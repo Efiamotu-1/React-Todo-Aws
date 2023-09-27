@@ -24,4 +24,7 @@
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+  .error {
+    font-size: 1.5rem;
+    color: red;
+  }

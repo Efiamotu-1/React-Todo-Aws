@@ -6,22 +6,24 @@ import styles from "./Verify.module.css";
 import {Auth} from 'aws-amplify'
 
 export default function Verify() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [code, setCode] = useState("");
+  const [error, setError] = useState("")
 
   const { verify, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
     try{
-      if (email && code){
-          await Auth.confirmSignUp(email, code)
+      if (username === '' ||  code === '') setError('Please input a value in each field')
+      if (username && code){
+          await Auth.confirmSignUp(username, code)
           verify()
           navigate("/task")
           console.log("success")
       } 
     }catch (err) {
-      console.error(err)
+      setError(err.message)
     }
   }
 
@@ -41,8 +43,8 @@ export default function Verify() {
           <input
             type="text"
             id="username"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
           />
         </div>
 
@@ -57,6 +59,7 @@ export default function Verify() {
         </div>
 
         <div>
+        {error && <p className={styles.error}>{error}</p>}
           <Button type="primary">Verify</Button>
         </div>
       </form>

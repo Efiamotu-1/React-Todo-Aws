@@ -8,19 +8,24 @@ import {Auth} from 'aws-amplify'
 export default function Login() {
   const [username, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("")
 
   const { verify, login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
-
-    if (username && password) {
-      const user = await Auth.signIn(username, password)
-      navigate("/task")
-      login(user)
-      verify()
-  }
+    try{
+      if (username === '' ||  password === '') setError('Please input a value in each field')
+      if (username && password) {
+        const user = await Auth.signIn(username, password)
+        navigate("/task")
+        login(user)
+        verify()
+    }
+    }catch(err) {
+      setError(err.message)
+    }
 }
 
   useEffect(
@@ -55,6 +60,7 @@ export default function Login() {
         </div>
 
         <div>
+        {error && <p className={styles.error}>{error}</p>}
           <Button type="primary">Login</Button>
         </div>
       </form>

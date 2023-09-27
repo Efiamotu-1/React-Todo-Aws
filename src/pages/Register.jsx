@@ -11,6 +11,7 @@ export default function Register() {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("")
 
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -18,8 +19,13 @@ export default function Register() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    const isNotValidUsername = !(/^[a-zA-Z0-9]+$/.test(username))
+    const isNotValidPassword = password.length < 8
     try{
-      if (username && email && password) {
+      if (isNotValidPassword) setError('your password is less than 8')
+        if(isNotValidUsername) setError('your username should be alpha numeric')
+        if (username === '' || email === '' || password === '') setError('Please input a value in each field')
+      if (isNotValidPassword !== true && email && isNotValidUsername !== true) {
         const {user} = await Auth.signUp({
           username: username,
           password: password,
@@ -32,7 +38,7 @@ export default function Register() {
         console.log("clicked")
       };
     }catch(err) {
-      console.error(err)
+      setError(err.message)
     }
 
 
@@ -80,6 +86,7 @@ export default function Register() {
         </div>
 
         <div>
+          {error && <p className={styles.error}>{error}</p>}
           <Button type="primary">Register</Button>
         </div>
       <div className={styles["login-link"]}>Have an account  <Link style={{color: "blue"}} to="login">Login</Link></div>
