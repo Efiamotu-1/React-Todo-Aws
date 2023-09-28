@@ -77,7 +77,7 @@ const handleLogout = () => {
         <input type="text" name="task" placeholder='Add a new Task' onChange={handleInput} value={inputValue.task ? inputValue.task : ""}/>
         <Button type="primary" disabled={isCreatingTask}>Add Task</Button>
         </form>
-        {isLoading ? <p>Loading Tasks...</p> : <TaskList tasks={tasks}/>}
+        {isLoading ? <p>Loading Tasks...</p> : <TaskList tasks={tasks || []}/>}
       </div>
       </div>
     )
