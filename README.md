@@ -72,7 +72,6 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-> Add a link to your deployed project.
 
 - [Live Demo Link](https://dev.drlpksyr2oyf0.amplifyapp.com/)
 
@@ -180,7 +179,5 @@ This is a test project for a
 ## 📝 License <a name="license"></a>
 
 This project is [MIT](./LICENSE) licensed.
-
-[MIT license available on GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
