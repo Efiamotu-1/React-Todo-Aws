@@ -35,7 +35,7 @@
 
 ### Tech Stack <a name="tech-stack"></a>
 
-<details>
+
   <summary>Client</summary>
   <ul>
     <li><a href="https://reactjs.org/">React.js</a>
@@ -54,7 +54,7 @@
   <ul>
     <li><a href="https://aws.amazon.com/dynamodb/">DynamoDb</a></li>
   </ul>
-</details>
+
 
 <!-- Features -->
 
