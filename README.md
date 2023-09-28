@@ -12,7 +12,7 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-    <!-- - [🚀 Live Demo](#live-demo) -->
+    - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Setup](#setup)
@@ -38,15 +38,21 @@
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://reactjs.org/">React.js</a></li>
+    <li><a href="https://reactjs.org/">React.js</a>
+    </li>
+    <li><a href="https://tanstack.com/query/latest/docs/react/overview">Tanstack (React Query)</a></li>
+        <li><a href="https://nextjs.org/docs/app/building-your-application/styling/css-modules">Css modules</a></li>
   </ul>
   <summary>Server</summary>
   <ul>
     <li><a href="https://aws.amazon.com/amplify/">Aws</a></li>
+    <li><a href="https://aws.amazon.com/amplify/">Aws Amplify</a></li>
+    <li><a href="https://aws.amazon.com/cognito/">Aws Cognito</a></li>
+    <li><a href="https://aws.amazon.com/graphql/">Graphql</a></li>
   </ul>
   <summary>Database</summary>
   <ul>
-    <li><a href="https://aws.amazon.com/amplify/">DynamoDb</a></li>
+    <li><a href="https://aws.amazon.com/dynamodb/">DynamoDb</a></li>
   </ul>
 </details>
 
@@ -57,16 +63,18 @@
 - **Todo Task List**
 - **Api powered**
 - **State Management**
+- **React useContextAPI**
+- **React Query**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LIVE DEMO -->
 
-<!-- ## 🚀 Live Demo <a name="live-demo"></a>
+## 🚀 Live Demo <a name="live-demo"></a>
 
 > Add a link to your deployed project.
 
-- [Live Demo Link](https://google.com) -->
+- [Live Demo Link](https://dev.drlpksyr2oyf0.amplifyapp.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -112,7 +120,7 @@ To run the project, execute the following command:
 Example command:
 
 ```sh
-  npm start
+  npm run dev
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

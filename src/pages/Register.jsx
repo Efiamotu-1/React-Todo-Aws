@@ -35,7 +35,6 @@ export default function Register() {
         })
         login(user)
         navigate("/verify")
-        console.log("clicked")
       };
     }catch(err) {
       setError(err.message)

@@ -16,14 +16,12 @@ export default function Task({task}) {
   async function handleEdit(taskId) {
     try {
       setShowEditButton(false)
-      console.log(editValue)
       const editTask = {
         content: editValue,
         id: taskId
       }
       const result = await API.graphql(graphqlOperation(updateTask, {input: editTask}))
-      console.log("successfully edited a task")
-      console.log(result)
+      return result
     }catch(err) {
       console.error(err)
     }
@@ -34,11 +32,10 @@ export default function Task({task}) {
       const deleteTaskId = {
         id: taskId
       }
-      const result = await API.graphql(graphqlOperation(deleteTask, {input: deleteTaskId}))
-      console.log(result)
-      console.log("deleted successfully")
+    await API.graphql(graphqlOperation(deleteTask, {input: deleteTaskId}))
+  
     }catch(err) {
-      console.error(err)
+      console.error(err.message)
     }
   }
   const queryClient = useQueryClient()
@@ -50,7 +47,7 @@ export default function Task({task}) {
       })
     },
     onError: (err) => {
-      console.error(err)  
+      console.error(err.message)  
     }
   })
 
@@ -72,9 +69,9 @@ export default function Task({task}) {
     <span> 
       {task.content}
       </span> 
-      <span>
-      <Button onClick={() => showEdit(task.content)} disabled={isEditingTask}>Edit</Button>
-      <Button onClick={() => mutate(task.id)} disabled={isDeleting}>Delete</Button>
+      <span className={styles.btn}>
+      <Button onClick={() => showEdit(task.content)} disabled={isEditingTask} type="primary">Edit</Button>
+      <Button onClick={() => mutate(task.id)} disabled={isDeleting} type="primary">Delete</Button>
       </span>
       </div>
       {showEditButton && 

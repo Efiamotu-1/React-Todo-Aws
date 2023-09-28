@@ -24,7 +24,7 @@ function Tasks() {
         const tasks = taskData.data.listTasks.items
         return tasks
       }catch(err) {
-        console.error(err)
+        console.error(err.message)
       }
     }
     const {isLoading, data: tasks} = useQuery({
@@ -32,7 +32,12 @@ function Tasks() {
       queryFn: () => getTasks()
     })
 
-
+const handleLogout = () => {
+  queryClient.removeQueries({
+    queryKey: ['task']
+  })
+  logout()
+}
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -42,13 +47,11 @@ function Tasks() {
               content: inputValue.task
             }
             const result = await API.graphql(graphqlOperation(createTask, {input: newTask}))
-            console.log("success")
-            console.log(result)
             setInputValue({...inputValue, task: ""})
             return result
           }
         }catch(err) {
-          console.error(err)
+          console.error(err.message)
         }
     }
   
@@ -66,7 +69,7 @@ function Tasks() {
     })
     return (
       <div className={styles.page}>
-        <Button type="primary" onClick={() => logout()}>Logout</Button>
+        <Button type="primary" onClick={handleLogout}>Logout</Button>
       <div className={styles.container}>
         <h1>{user.username} Welcome To Today's Todo Tasks</h1>
         <form onSubmit={mutate} className={styles.form}>

@@ -20,7 +20,6 @@ export default function Verify() {
           await Auth.confirmSignUp(username, code)
           verify()
           navigate("/task")
-          console.log("success")
       } 
     }catch (err) {
       setError(err.message)

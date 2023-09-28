@@ -23,6 +23,11 @@
     font-size: 2rem;
     display: flex;
     justify-content: space-between;
+    padding: .5rem 1rem;
+  }
+
+  .notask {
+    font-size: 2rem;
   }
 
   .form {
@@ -32,4 +37,9 @@
     justify-content: start;
     align-items: start;
     
+  }
+
+  .btn {
+    display: flex;
+    gap: 1rem;
   }
