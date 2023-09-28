@@ -29,7 +29,7 @@
 
 # 📖 React Todo App With Aws <a name="about-project"></a>
 
-**[React Todo App With Aws]** is a todo app that lets you create tasks and save to a backend which can be retrieved at any point in time, it also gives users the ability to share their tasks via email and it has authentication enabled.
+**[React Todo App With Aws]** is a full-stack application powered by `Aws Amplify`, Created using vite, It has the functionality of performing crud operations for a todo and is enabled with authentication and authorization allowing only signed in users to be create, read, update and delete a todo.
 
 ## 🛠 Built With <a name="built-with"></a>
 
